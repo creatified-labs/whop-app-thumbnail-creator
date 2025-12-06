@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 import { whopsdk } from "@/lib/whop-sdk";
 
 export async function POST(request: NextRequest): Promise<Response> {
-	if (!whopsdk) {
+	if (!whopsdk || !process.env.WHOP_WEBHOOK_SECRET) {
 		return new Response("OK", { status: 200 });
 	}
 

@@ -9,6 +9,12 @@ export default async function DashboardPage({
 	params: Promise<{ companyId: string }>;
 }) {
 	const { companyId } = await params;
+
+	if (!whopsdk) {
+		throw new Error(
+			"Whop SDK is not configured. Please set NEXT_PUBLIC_WHOP_APP_ID, WHOP_API_KEY and WHOP_WEBHOOK_SECRET.",
+		);
+	}
 	// Ensure the user is logged in on whop.
 	const { userId } = await whopsdk.verifyUserToken(await headers());
 
